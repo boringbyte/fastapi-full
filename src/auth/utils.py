@@ -1,7 +1,7 @@
 import jwt
 import uuid
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from src.config import Config
 from passlib.context import CryptContext
@@ -20,7 +20,7 @@ def verify_password(password: str, password_hash: str) -> bool:
     return passwd_context.verify(password, password_hash)
 
 def create_access_token(user_data: dict, expiry: timedelta=None, refresh: bool=False) -> str:
-    expire_at = datetime.now() + (expiry or timedelta(seconds=ACCESS_TOKEN_EXPIRY))
+    expire_at = datetime.now(timezone.utc) + (expiry or timedelta(seconds=ACCESS_TOKEN_EXPIRY))
     payload = {'user': user_data,
                'exp': expire_at,
                "jti": str(uuid.uuid4()),
