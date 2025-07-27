@@ -2,3 +2,9 @@ fastapi[standard]
 sqlmodel
 asyncpg
 pydantic-settings
+alembic
+pydantic
+sqlalchemy
+passlib
+bcrypt
+PyJWT
